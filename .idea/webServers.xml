@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="db1f6f94-4a02-448e-92e8-2358c6da971e" name="pins" url="http://ftp.itdecision.com.ua">
+        <fileTransfer rootFolder="/pins.itdecision.com.ua" host="ftp.itdecision.com.ua" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
