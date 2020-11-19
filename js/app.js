@@ -96,6 +96,13 @@ new Vue({
         }
     },
     methods: {
+        validationButtons() {
+            let temp = []
+            Object.keys(this.form).forEach(item => {
+                temp.push(this.form[item].validation.validated)
+            });
+            return temp.every(validated => validated === 1)
+        },
         validationForms() {
             let temp = []
             Object.keys(this.form).forEach(item => {
@@ -124,9 +131,9 @@ new Vue({
                     knowledge: this.choosed.knowledge,
                     time: this.choosed.time,
                     course: this.choosed.post[0].post_title,
-                    name: this.form.name,
-                    phone: this.form.phone,
-                    email: this.form.email,
+                    name: this.form.name.value,
+                    phone: this.form.phone.value,
+                    email: this.form.email.value,
                 },
                 success: function (response) {
                     console.log(response);

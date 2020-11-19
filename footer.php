@@ -205,7 +205,7 @@
 
     const course = <?php echo json_encode($course) ?>;
 </script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.12"></script>
-<script src="https://pins.itdecision.com.ua/wp-content/themes/pins-theme/js/app.js" type="text/javascript"></script>
+<!--<script src="https://pins.itdecision.com.ua/wp-content/themes/pins-theme/js/vue.js"></script>-->
+<!--<script src="https://pins.itdecision.com.ua/wp-content/themes/pins-theme/js/main.js" type="text/javascript"></script>-->
 </body>
 </html>

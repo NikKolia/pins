@@ -31,8 +31,7 @@ get_header();
 					?>
 					<div class="col-md-12">
 						<div class="newsBox"> 
-							<h2><a href="<?php the_permalink(); ?>"
-                                   class="news-title"><?php the_title(); ?></a></h2>
+							<h2><?php the_title(); ?></h2>
 							<p><?php the_content() /* содержимое поста */ ?></p>
 						</div>
 					</div>

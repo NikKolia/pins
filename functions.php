@@ -143,7 +143,7 @@ function pins_theme_scripts()
 
     wp_enqueue_style('pins-theme-reset', get_template_directory_uri() . '/assets/css/reset.css');
 
-    wp_enqueue_style('pins-theme-main', get_template_directory_uri() . '/assets/css/main.css');
+    wp_enqueue_style('pins-theme-main', get_template_directory_uri() . '/assets/css/main.css?v=1.0.14');
 
     //wp_enqueue_style( 'pins-theme-slick', get_template_directory_uri().'/assets/css/slick.css' );
 
@@ -414,61 +414,61 @@ function register_taxonomy_knowledge()
 
 add_action('init', 'register_taxonomy_knowledge');
 
-function register_taxonomy_timetable()
-{
-    $labels = [
-        'name' => _x('Расписание', 'taxonomy general name'),
-        'singular_name' => _x('Расписание', 'taxonomy singular name'),
-        'search_items' => __('Найти расписание'),
-        'all_items' => __('Всё расписание'),
-        'parent_item' => __('Основное расписание'),
-        'parent_item_colon' => __('Основное расписание:'),
-        'edit_item' => __('Добавить расписание'),
-        'update_item' => __('Обновить расписание'),
-        'add_new_item' => __('Добавить новое расписание'),
-        'new_item_name' => __('Новое расписание'),
-        'menu_name' => __('Расписание'),
-    ];
-    $args = [
-        'hierarchical' => true, // make it hierarchical (like categories)
-        'labels' => $labels,
-        'show_ui' => true,
-        'show_admin_column' => true,
-        'query_var' => true,
-        'rewrite' => ['slug' => 'timetable'],
-    ];
-    register_taxonomy('timetable', ['course'], $args);
-}
-
-add_action('init', 'register_taxonomy_timetable');
-
-function register_taxonomy_timestudy()
-{
-    $labels = [
-        'name' => _x('Время', 'taxonomy general name'),
-        'singular_name' => _x('Время', 'taxonomy singular name'),
-        'search_items' => __('Найти время'),
-        'all_items' => __('Доступное время'),
-        'parent_item' => __('Основное время'),
-        'parent_item_colon' => __('Основное время:'),
-        'edit_item' => __('Добавить время занятий'),
-        'update_item' => __('Обновить время'),
-        'add_new_item' => __('Добавить новое время'),
-        'new_item_name' => __('Новое время'),
-        'menu_name' => __('Время занятий'),
-    ];
-    $args = [
-        'hierarchical' => true, // make it hierarchical (like categories)
-        'labels' => $labels,
-        'show_ui' => true,
-        'show_admin_column' => true,
-        'query_var' => true,
-        'rewrite' => ['slug' => 'timestudy'],
-    ];
-    register_taxonomy('timestudy', ['course'], $args);
-}
-
-add_action('init', 'register_taxonomy_timestudy');
+//function register_taxonomy_timetable()
+//{
+//    $labels = [
+//        'name' => _x('Расписание', 'taxonomy general name'),
+//        'singular_name' => _x('Расписание', 'taxonomy singular name'),
+//        'search_items' => __('Найти расписание'),
+//        'all_items' => __('Всё расписание'),
+//        'parent_item' => __('Основное расписание'),
+//        'parent_item_colon' => __('Основное расписание:'),
+//        'edit_item' => __('Добавить расписание'),
+//        'update_item' => __('Обновить расписание'),
+//        'add_new_item' => __('Добавить новое расписание'),
+//        'new_item_name' => __('Новое расписание'),
+//        'menu_name' => __('Расписание'),
+//    ];
+//    $args = [
+//        'hierarchical' => true, // make it hierarchical (like categories)
+//        'labels' => $labels,
+//        'show_ui' => true,
+//        'show_admin_column' => true,
+//        'query_var' => true,
+//        'rewrite' => ['slug' => 'timetable'],
+//    ];
+//    register_taxonomy('timetable', ['course'], $args);
+//}
+//
+//add_action('init', 'register_taxonomy_timetable');
+//
+//function register_taxonomy_timestudy()
+//{
+//    $labels = [
+//        'name' => _x('Время', 'taxonomy general name'),
+//        'singular_name' => _x('Время', 'taxonomy singular name'),
+//        'search_items' => __('Найти время'),
+//        'all_items' => __('Доступное время'),
+//        'parent_item' => __('Основное время'),
+//        'parent_item_colon' => __('Основное время:'),
+//        'edit_item' => __('Добавить время занятий'),
+//        'update_item' => __('Обновить время'),
+//        'add_new_item' => __('Добавить новое время'),
+//        'new_item_name' => __('Новое время'),
+//        'menu_name' => __('Время занятий'),
+//    ];
+//    $args = [
+//        'hierarchical' => true, // make it hierarchical (like categories)
+//        'labels' => $labels,
+//        'show_ui' => true,
+//        'show_admin_column' => true,
+//        'query_var' => true,
+//        'rewrite' => ['slug' => 'timestudy'],
+//    ];
+//    register_taxonomy('timestudy', ['course'], $args);
+//}
+//
+//add_action('init', 'register_taxonomy_timestudy');
 
 function register_taxonomy_gallery()
 {
@@ -558,6 +558,7 @@ function save_my_form_data_to_my_cpt($contact_form)
     return;
 }
 
+
 function edit_admin_menus()
 {
     global $menu;
@@ -609,6 +610,11 @@ function console_log($data)
 //}
 
 
+wp_enqueue_script( 'vue-script', get_template_directory_uri().'/js/vue.js', '', '1.0.0', true );
+wp_enqueue_script( 'my-ajax-script', get_template_directory_uri().'/js/main.js', array( 'jquery'), '1.0.4', true );
+wp_localize_script( 'my-ajax-script', 'my_ajax_object', array('ajax_url' => admin_url( 'admin-ajax.php' )));
+
+
 function my_ajax_handler(){
     $city = $_POST['city'];
     $knowledge = $_POST['knowledge'];
@@ -621,16 +627,18 @@ function my_ajax_handler(){
     $email = $_POST['email'];
 
 
-    $to      = 'evgenykovalenkodev@gmail.com';
+    $to      = get_option('admin_email');
     $subject = 'Контактная форма';
     $message =
-        $name. "\r\n".
-        $phone. "\r\n".
-        $email. "\r\n";
+        'Имя: '. $name ."\r\n".
+        'Телефон: '. $phone ."\r\n".
+        'E-mail: '. $email ."\r\n"."\r\n".
+        'Город: '. $city ."\r\n".
+        'Курс: '. $course ."\r\n".
+        'Квалификация: '. $knowledge ."\r\n".
+        'Даты: '. $time;
 
-    wp_mail($to, $subject, $message);
-
-
+    $test = wp_mail($to, $subject, $message);
 
     global $wpdb;
 
@@ -641,13 +649,15 @@ function my_ajax_handler(){
         'city' => $city,
         'knowledge' => $knowledge ? $knowledge : null,
         'time' => $time,
-        'course' => $course,
+        'course' => $course
     ]);
 
     if($result_check){
-        echo'success';
+    	print_r($test);
+    	print_r($to);
+        echo 'success';
     }else{
-        echo'error';
+        echo 'error';
     }
 
     wp_die();
@@ -655,7 +665,4 @@ function my_ajax_handler(){
 }
 add_action( 'wp_ajax_call_my_ajax_handler', 'my_ajax_handler' );
 add_action( 'wp_ajax_nopriv_call_my_ajax_handler', 'my_ajax_handler' );
-
-wp_enqueue_script( 'my-ajax-script', get_stylesheet_directory_uri() . '/js/app.js', array('jquery') );
-wp_localize_script( 'my-ajax-script', 'my_ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' ) ) );
 
